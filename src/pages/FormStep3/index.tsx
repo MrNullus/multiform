@@ -1,4 +1,4 @@
-import * as C from './styles';
+import * as C from './styles.ts';
 
 import React from 'react';
 

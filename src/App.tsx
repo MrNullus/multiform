@@ -1,12 +1,11 @@
+import { Router } from './router.tsx';
 
+import { FormProvider } from './context/FormContext.tsx';
 
-
-const App = () => {
+export const App = () => {
   return (
-    <div>
-      ...
-    </div>
-  )
+    <FormProvider>
+      <Router />
+    </FormProvider>
+  );
 };
-
-export default App;z
