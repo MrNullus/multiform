@@ -1,6 +1,6 @@
 import { Router } from './router.tsx';
 
-import { FormProvider } from './context/FormContext.tsx';
+import { FormProvider } from './contexts/FormContext.tsx';
 
 export const App = () => {
   return (

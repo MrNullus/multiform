@@ -38,12 +38,12 @@ const initialData: State = {
 
 
 // - Criar o Context - contexto (seria basicamente a caixinha que vai guardar todos os valores para um determinado cenario)
-const fromContext = createContext<ContextType | undefined>( undefined );
+const FormContext = createContext<ContextType | undefined>(undefined);
 
 
 // - Criar um Reducer, será aquele responsavel por fazer ações especificas dentro da aplicação
 
-export enum FormActions = {
+export enum FormActions {
 	setCurrentStep,
 	setName,
 	setLevel,
@@ -70,7 +70,7 @@ const formReducer = ( state: State, action: Action ) => {
 			return {...state, gitHub: action.payload};
 
 		default:
-			return ...state;
+			return state;
 	}
 
 }

@@ -1,14 +1,19 @@
+import { ReactNode } from 'react';
+
 import * as C from './styles.ts';
 
-type children = { ReactNode };
+import { Header } from '../Header/index.tsx';
 
-export const Theme = ({ children }) => {
-	return (
+type Props = { 
+	children: ReactNode 
+};
+
+export const Theme = ({ children }: Props) => {
+	return (	
 		<C.Container>
 
-			<C.Area>
-
-				<C.Header />
+			<C.Area>		
+				<Header />
 
 				<C.Steps>
 					
@@ -21,9 +26,8 @@ export const Theme = ({ children }) => {
 					</C.Page>
 
 				</C.Steps>
-
 			</C.Area>
 
-		</C.Contaienr>
+		</C.Container>
 	);
-}
+};

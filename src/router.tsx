@@ -10,9 +10,11 @@ import { FormStep3 } from './pages/FormStep3/index.tsx';
 export const Router = () => {
 	return (
 		<BrowserRouter>
+
 			<Router path="/" exact component={FormStep1} />
 			<Router path="/step2"  component={FormStep2} />
 			<Router path="/step3"  component={FormStep3} />
+			
 		</BrowserRouter>
 	);
 }
