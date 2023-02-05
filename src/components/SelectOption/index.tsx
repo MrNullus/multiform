@@ -10,9 +10,9 @@ type Props = {
 	onClick: () => void;
 }
 
-export const SelectOption = ({ title, description, icon, boolean, onClick }: Props) => {
+export const SelectOption = ({ title, description, icon, selected, onClick }: Props) => {
 	return (
-		<Container 
+		<C.Container 
 			onClick={onClick}
 			selected={selected}
 		>
@@ -27,6 +27,6 @@ export const SelectOption = ({ title, description, icon, boolean, onClick }: Pro
 					{description}
 				</C.Description>
 			</C.Info>
-		</Container>
+		</C.Container>
 	);
 };

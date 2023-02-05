@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-import { useForm } from '../../contexts/FormContext';
+import { useForm } from "../../contexts/FormContext.tsx";
 
 import * as C from './styles.ts';
 
-import { SidebarItem } from '../SidebarItem';
+import { SidebarItem } from '../SidebarItem/index.tsx';
 import { Header } from '../Header/index.tsx';
 
 type Props = { 
@@ -14,7 +14,7 @@ type Props = {
 
 export const Theme = ({ children }: Props) => {
 
-	const [ state ] = useForm();
+	const { state } = useForm();
 
 	return (	
 		<C.Container>
@@ -25,7 +25,7 @@ export const Theme = ({ children }: Props) => {
 				<C.Steps>
 					
 					<C.Sidebar>
-						<C.SidebarItem  
+						<SidebarItem  
 							title="Pessoal"
 							description="Se identifique"
 							icon="profile"
@@ -33,7 +33,7 @@ export const Theme = ({ children }: Props) => {
 							active={state.currentStep === 1}
 						/>						
 
-						<C.SidebarItem  
+						<SidebarItem  
 							title="Profissional"
 							description="Seu nível"
 							icon="book"
@@ -41,7 +41,7 @@ export const Theme = ({ children }: Props) => {
 							active={state.currentStep === 2}
 						/>
 
-						<C.SidebarItem  
+						<SidebarItem  
 							title="Contatos"
 							description="Como te achar"
 							icon="mail"

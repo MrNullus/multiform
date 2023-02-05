@@ -1,4 +1,4 @@
-import ChangeEvent from 'react';
+import { ChangeEvent,  useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useForm, FormActions } from '../../contexts/FormContext.tsx';
@@ -12,14 +12,14 @@ import { SelectOption } from '../../components/SelectOption/index.tsx';
 export const FormStep2 = ( ) => {
 
     const navigate = useNavigate();
-    // - useForm vai retornar o state (o objeto) e dispath (as ações que se pode fazer)
-    const { state, dispath } = useForm();
+    // - useForm vai retornar o state (o objeto) e dispatch (as ações que se pode fazer)
+    const { state, dispatch} = useForm();
     
     useEffect(() => {
         if (state.name === '') {
-            navigate.push('/');
+            navigate('/');
         } else {
-            dispath({
+            dispatch({
                 type: FormActions.setCurrentStep,
                 payload: 2
             });
@@ -28,14 +28,14 @@ export const FormStep2 = ( ) => {
 
     const handleNextStep = ( ) => {
         if (state.setName !== '') {
-            navigate.push('/step3');
+            navigate('/step3');
         } else {
             alert("Preencha o campo nome");
         }
     };
 
     const setLevel = (level: number) => {
-        dispath({
+        dispatch({
             type: FormActions.setLevel,
             payload: level
         });

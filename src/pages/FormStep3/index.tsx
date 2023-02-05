@@ -1,4 +1,4 @@
-import ChangeEvent from 'react';
+import { ChangeEvent,  useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 
@@ -8,77 +8,75 @@ import * as C from './styles.ts';
 import { Theme } from '../../components/Theme/index.tsx';
 
 
-export const FormStep3 = ( ) => {
-
+export const FormStep3 = () => {
     const navigate = useNavigate();
-    // - useForm vai retornar o state (o objeto) e dispath (as ações que se pode fazer)
-    const { state, dispath } = useForm();
+    const { state, dispatch } = useForm();
 
     useEffect(() => {
-        if (state.name !== '') {
-            navigate.push('/');
+        if (state.name === '') {
+            navigate('/');
         } else {
-            dispath({
+            dispatch({
                 type: FormActions.setCurrentStep,
                 payload: 3
             });
         }
-    }, [])
+    }, []);
 
-    const handleNextStep = ( ) => {
-        if (state.email !== '' && state.github !== '') {
-            console.log(state);
+    const handleNextStep = () => {
+        var validEmail = /\S+@\S+\.\S+/;
+        if (state.email !== '' && state.github !== '' && validEmail.test(state.email)) {
+	alert("Dados cadastrados com sucesso!");
+        } else if (!validEmail.test(state.email)) {
+            alert('Email incorreto')
         } else {
-            alert("Preencha os dados.");
+            alert('Preencha seu GitHub');
         }
-    };
+    }
 
-    const handleEmailChange = ( e: ChangeEvent<HTMLInputElement> ) => {
-        dispath({
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch({
             type: FormActions.setEmail,
             payload: e.target.value
-        });
-    };
-    const handleGitHubChange = ( e: ChangeEvent<HTMLInputElement> ) => {
-        dispath({
+        })
+    }
+
+    const handleGithubChange = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch({
             type: FormActions.setGithub,
-            payload: e.target.value
-        });
-    };
+            payload: e.target.value.substring(19)
+        })
+    }
 
+    return (
+        <Theme>
+            <C.Container>
+                <p>Passo {state.currentStep}/3</p>
+                <h2>Legal {state.name.substring(0, state.name.indexOf(' '))}, onde te achamos?</h2>
+                <p>Preencha com seus contatos para conseguirmos entrar em contato.</p>
 
-	return (
-		<Theme>
-			<C.Container>
-                <p>Passo 3/3</p>
-                <h1>Legal {state.name}, agora onde te achamos?</h1>
-                <p>Preencha os campos abaixo com os seus devidos contatos.</p>
-
-                <hr/>
+                <hr />
 
                 <label>
-                    Qual seu e-mail?
+                    Qual o seu e-mail?
                     <input
-                        type="text"
-                        autoFocus
+                        type="email"
                         value={state.email}
                         onChange={handleEmailChange}
                     />
                 </label>
-
                 <label>
-                    Qual seu GitHub?
+                    Qual o seu GitHub?
                     <input
                         type="url"
-                        autoFocus
-                        value={state.github}
-                        onChange={handleGitHubChange}
+                        value={`https://github.com/${state.github}`}
+                        onChange={handleGithubChange}
                     />
                 </label>
 
                 <Link to="/step2" className="backButton">Voltar</Link>
-                <button onClick={handleNextStep}>Finalizar</button>
-        	</C.Container>
-		</Theme>
-	)
-};
+                <button onClick={handleNextStep}>Finalizar Cadastro</button>
+            </C.Container>
+        </Theme>
+    );
+}

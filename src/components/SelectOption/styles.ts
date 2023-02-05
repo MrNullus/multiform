@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div<{ selected: boolean; }>`
+export const Container = styled.div<{ selected: boolean }>`
     display: flex;
     border: 2px solid ${props => props.selected ? '#25CD89' : '#16195C'};
     border-radius: 10px;

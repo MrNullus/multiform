@@ -1,4 +1,4 @@
-import ChangeEvent from 'react';
+import { ChangeEvent,  useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useForm, FormActions } from '../../contexts/FormContext.tsx';
@@ -10,26 +10,26 @@ import { Theme } from '../../components/Theme/index.tsx';
 export const FormStep1 = ( ) => {
 
     const navigate = useNavigate();
-    // - useForm vai retornar o state (o objeto) e dispath (as ações que se pode fazer)
-    const { state, dispath } = useForm();
+    // - useForm vai retornar o state (o objeto) e dispatch(as ações que se pode fazer)
+    const { state, dispatch } = useForm();
 
-    useEffect(() => {
-        dispath({
+     useEffect(() => {
+        dispatch({
             type: FormActions.setCurrentStep,
             payload: 1
         });
-    }, [])
+    }, []);
 
     const handleNextStep = ( ) => {
         if (state.setName !== '') {
-            navigate.push('/step2');
+            navigate('/step2');
         } else {
             alert("Preencha o campo nome");
         }
     };
 
     const handleNameChange = ( e: ChangeEvent<HTMLInputElement> ) => {
-        dispath({
+        dispatch({
             type: FormActions.setName,
             payload: e.target.value
         });
